@@ -3,6 +3,7 @@ using PreOrder.Api;
 using PreOrder.Core;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: false);   // ไฟล์ลับ ไม่ขึ้น Git
 builder.Services.AddSingleton(TimeProvider.System);                       // นาฬิกาฝั่ง Server
 builder.Services.AddSingleton(NpgsqlDataSource.Create(
     builder.Configuration.GetConnectionString("Supabase") ?? throw new InvalidOperationException("ไม่พบ ConnectionStrings:Supabase")));
